@@ -2,10 +2,6 @@ package interfaces;
 import java.util.List;
 
 /**
- * 
- */
-
-/**
  * @author ideff
  *
  */
@@ -14,9 +10,8 @@ public interface Duel<T> {
 	/**
 	 * 
 	 * @param t Duel winner
-	 * @return true if ok, false if error
 	 */
-	boolean setWinner(T t);
+	void setWinner(T t);
 	
 	/**
 	 * 
@@ -32,7 +27,7 @@ public interface Duel<T> {
 	
 	/**
 	 * 
-	 * Adds participant to duel. Duel can contains only 2 participants
+	 * Adds participant to duel. Duel can contains only 2 participants.
 	 * 
 	 * @param t Participant to add
 	 * @return True if ok, false if error
@@ -40,10 +35,59 @@ public interface Duel<T> {
 	boolean addParticipant(T t);
 	
 	/**
+	 * Adds participants to duel. Duel can contains only 2 participants.
+	 * 
+	 * @param iterator Collection of participants
+	 * @return True if ok, false if error
+	 */
+	boolean addParticipants(Iterable<T> iterator);
+	
+	/**
+	 * Duel can contains only 2 participants.
+	 * 
+	 * @param t Array of participants
+	 * @return True if ok, false if error
+	 */
+	boolean addParticipants(T[] t);
+	
+	/**
+	 * Removing participant from duel, using equals() method.
 	 * 
 	 * @param t Participant to remove
 	 * @return True if ok, false if error
 	 */
 	boolean removeParticipant(T t);
+	
+	/**
+	 * 
+	 * @return Left node duel, null if absent
+	 */
+	Duel<T> getLeftNodeDuel();
+	
+	/**
+	 * 
+	 * @return Right node duel, null if absent
+	 */
+	Duel<T> getRightNodeDuel();
+	
+	/**
+	 * 
+	 * @param t Duel to set
+	 */
+	public void setLeftNodeDuel(Duel<T> t);
+	
+	/**
+	 * 
+	 * @param t Duel to set
+	 */
+	public void setRightNodeDuel(Duel<T> t);
+	
+	/**
+	 * 
+	 * @return Winner duel, null if current duel is final
+	 */
+	Duel<T> getWinnerDuel();
+	
+	
 	
 }
