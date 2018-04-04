@@ -91,38 +91,6 @@ public class DefaultDuelTest {
 	}
 	
 	@Test
-	public void shouldSuccessfullyAddArrayOfParticipants() {
-		// given
-		String[] participants = {"p1", "p2"};
-		// when
-		boolean result = duel.addParticipants(participants);
-		// then
-		assertTrue(result);
-	}
-	
-	@Test
-	public void shouldFailAddingArrayOfParticipants() {
-		// given
-		String[] participants = {"p1", "p2", "p3"};
-		// when
-		boolean result = duel.addParticipants(participants);
-		// then
-		assertTrue(result);
-	}
-	
-	@Test 
-	public void shouldFailAddingArrayOfTheSameParticipants() {
-		// given
-		String p1 = "p1";
-		String p2 = p1;
-		String[] participants = {p1 ,p2};
-		// when
-		boolean result = duel.addParticipants(participants);
-		// then
-		assertFalse(result);
-	}
-	
-	@Test
 	public void shouldSuccessfullyAddCollectionOfParticipants() {
 		// given
 		List<String> participants = new ArrayList<>();
@@ -166,7 +134,9 @@ public class DefaultDuelTest {
 		// given
 		String p1 = "p1";
 		String p2 = "p2";
-		String[] participants = {p1, p2};
+		List<String> participants = new ArrayList<String>();
+		participants.add(p1);
+		participants.add(p2);
 		duel.addParticipants(participants);
 		// when
 		boolean result = duel.removeParticipant(p1);
@@ -181,8 +151,9 @@ public class DefaultDuelTest {
 		String p1 = "p1";
 		String p2 = "p2";
 		String p3 = "p3";
-		String[] participants = {p1, p2};
-		duel.addParticipants(participants);
+		List<String> participants = new ArrayList<String>();
+		participants.add(p1);
+		participants.add(p2);
 		// when
 		boolean result = duel.removeParticipant(p3);
 		// then

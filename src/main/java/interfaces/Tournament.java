@@ -1,4 +1,5 @@
 package interfaces;
+import java.util.Collection;
 import java.util.List;
 
 import enums.Level;
@@ -7,7 +8,7 @@ import enums.Level;
  * @author ideffx
  *
  */ 
-public interface Tournament<T> extends Iterable<T> {
+public interface Tournament<T> {
 	
 	/**
 	 * Use this method to start tournament after you add all participants
@@ -40,15 +41,7 @@ public interface Tournament<T> extends Iterable<T> {
 	 * @param participants Participants container
 	 * @return true if participant has been added, false if not
 	 */
-	boolean addParticipants(Iterable<T> participants);
-	
-	/**
-	 * Adds participants to tournament. Adding is only possible when tournament is not started.
-	 * 
-	 * @param participants Participants container
-	 * @return true if participant has been added, false if not
-	 */
-	boolean addParticipants(T[] participants);
+	boolean addParticipants(Collection<T> participants);
 	
 	/**
 	 * Adds duel to tournament. Adding is only possible when tournament is not started.
@@ -117,7 +110,7 @@ public interface Tournament<T> extends Iterable<T> {
 	 * 
 	 * @return Tournament level
 	 */
-	int getTournamentLevel();
+	Level getTournamentLevel();
 	
 	/**
 	 * 

@@ -1,5 +1,8 @@
 package interfaces;
+import java.util.Collection;
 import java.util.List;
+
+import enums.Level;
 
 /**
  * @author ideff
@@ -40,15 +43,7 @@ public interface Duel<T> {
 	 * @param iterator Collection of participants
 	 * @return True if ok, false if error
 	 */
-	boolean addParticipants(Iterable<T> iterator);
-	
-	/**
-	 * Duel can contains only 2 participants.
-	 * 
-	 * @param t Array of participants
-	 * @return True if ok, false if error
-	 */
-	boolean addParticipants(T[] t);
+	boolean addParticipants(Collection<T> iterator);
 	
 	/**
 	 * Removing participant from duel, using equals() method.
@@ -88,6 +83,10 @@ public interface Duel<T> {
 	 */
 	Duel<T> getWinnerDuel();
 	
-	
+	/**
+	 * 
+	 * @return Level of tournament
+	 */
+	Level getLevel();
 	
 }

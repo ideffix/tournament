@@ -3,86 +3,127 @@
  */
 package implementation;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import enums.Level;
 import interfaces.Duel;
 
 /**
  * @author ideff
  *
  */
-public class DefaultDuel<T> implements Duel<T>{
+public class DefaultDuel<T> implements Duel<T> {
+	
+	private T winner;
+	
+	private List<T> participants = new ArrayList<>();
+	
+	private Duel<T> leftDuelNode;
+	
+	private Duel<T> rightDuelNode;
+	
+	private Duel<T> winnerDuel;
+	
+	private Level level = Level.ZERO;
 
 	@Override
 	public void setWinner(T t) {
-		// TODO Auto-generated method stub
-		
+		winner = t;
+		if (winnerDuel != null) {
+			winnerDuel.addParticipant(t);
+		}
 	}
 
 	@Override
 	public T getWinner() {
-		// TODO Auto-generated method stub
-		return null;
+		return winner;
 	}
 
 	@Override
 	public List<T> getParticipants() {
-		// TODO Auto-generated method stub
-		return null;
+		return participants;
 	}
 
 	@Override
 	public boolean addParticipant(T t) {
-		// TODO Auto-generated method stub
-		return false;
+		if (participants.size() >= 2 || participants.contains(t)) {
+			return false;
+		} else {
+			return participants.add(t);
+		}
 	}
 
 	@Override
-	public boolean addParticipants(Iterable<T> iterator) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addParticipants(Collection<T> collection) {
+		if (validate(collection)) {
+			return participants.addAll(collection);
+		} else {
+			return false;
+		}
 	}
 
-	@Override
-	public boolean addParticipants(T[] t) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean validate(Collection<T> collection) {
+		return validateInputCollection(collection) && validateWithExistingParticipants(collection);
+	}
+
+	private boolean validateInputCollection(Collection<T> collection) {
+		Set<T> copy = new HashSet<>(collection);
+		return copy.size() == collection.size();
+	}
+
+	private boolean validateWithExistingParticipants(Collection<T> collection) {
+		Set<T> collect = Stream.concat(participants.stream(), collection.stream()).collect(Collectors.toSet());
+		return collect.size() == participants.size() + collection.size();
 	}
 
 	@Override
 	public boolean removeParticipant(T t) {
-		// TODO Auto-generated method stub
-		return false;
+		return participants.remove(t);
 	}
 
 	@Override
 	public Duel<T> getLeftNodeDuel() {
-		// TODO Auto-generated method stub
-		return null;
+		return leftDuelNode;
 	}
 
 	@Override
 	public Duel<T> getRightNodeDuel() {
-		// TODO Auto-generated method stub
-		return null;
+		return rightDuelNode;
 	}
 
 	@Override
 	public void setLeftNodeDuel(Duel<T> t) {
-		// TODO Auto-generated method stub
-		
+		leftDuelNode = t;
 	}
 
 	@Override
 	public void setRightNodeDuel(Duel<T> t) {
-		// TODO Auto-generated method stub
-		
+		rightDuelNode = t;
 	}
 
 	@Override
 	public Duel<T> getWinnerDuel() {
-		// TODO Auto-generated method stub
-		return null;
+		return winnerDuel;
+	}
+
+	public void setWinnerDuel(Duel<T> duel) {
+		winnerDuel = duel;
+	}
+
+	@Override
+	public Level getLevel() {
+		return level;
+	}
+	
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
 }

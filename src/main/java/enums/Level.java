@@ -9,6 +9,7 @@ package enums;
 
 public enum Level {
 	
+	ZERO(0),
 	FINAL(1),
 	SEMI_FINAL(2),
 	QUARTEL_FINAL(3),

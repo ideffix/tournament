@@ -49,7 +49,9 @@ public class DefaultTournamentTest {
 	@Test
 	public void shouldBeFinished() {
 		// given
-		String[] participants = { "p1", "p2" };
+		List<String> participants = new ArrayList<>();
+		participants.add("p1");
+		participants.add("p2");
 		tournament.addParticipants(participants);
 		tournament.start();
 		// when
@@ -62,7 +64,9 @@ public class DefaultTournamentTest {
 	@Test
 	public void shouldNotBeFinished() {
 		// given
-		String[] participants = { "p1", "p2" };
+		List<String> participants = new ArrayList<>();
+		participants.add("p1");
+		participants.add("p2");
 		tournament.addParticipants(participants);
 		// when
 		tournament.start();
@@ -82,18 +86,7 @@ public class DefaultTournamentTest {
 	}
 
 	@Test
-	public void shouldAddParticipantsArray() {
-		// given
-		String[] participants = { "p1", "p2" };
-		// when
-		boolean result = tournament.addParticipants(participants);
-		// then
-		assertTrue(result);
-		assertTrue(tournament.getParticipants().containsAll(Arrays.asList(participants)));
-	}
-
-	@Test
-	public void shouldAddParticipantsIterable() {
+	public void shouldAddParticipantsCollection() {
 		// given
 		String p1 = "p1";
 		String p2 = "p2";
@@ -123,20 +116,7 @@ public class DefaultTournamentTest {
 	}
 
 	@Test
-	public void shouldNotAddTheSameParticipantsArray() {
-		String p1 = "p1";
-		String p2 = p1;
-		String[] participants = { p1, p2 };
-		// when
-		boolean result = tournament.addParticipants(participants);
-		// then
-		assertFalse(result);
-		assertTrue(tournament.getParticipants().contains(p1));
-		assertEquals(tournament.getParticipantsCount(), 1);
-	}
-
-	@Test
-	public void shouldNotAddTheSameParticipantsIterable() {
+	public void shouldNotAddTheSameParticipantsCollection() {
 		String p1 = "p1";
 		String p2 = p1;
 		List<String> participants = new ArrayList<>();
@@ -146,8 +126,8 @@ public class DefaultTournamentTest {
 		boolean result = tournament.addParticipants(participants);
 		// then
 		assertFalse(result);
-		assertTrue(tournament.getParticipants().contains(p1));
-		assertEquals(tournament.getParticipantsCount(), 1);
+		assertFalse(tournament.getParticipants().contains(p1));
+		assertEquals(tournament.getParticipantsCount(), 0);
 	}
 
 	@Test
@@ -205,7 +185,9 @@ public class DefaultTournamentTest {
 	public void shouldRemoveParticipant() {
 		String p1 = "p1";
 		String p2 = "p2";
-		String[] participants = { p1, p2 };
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
 		tournament.addParticipants(participants);
 		// when
 		boolean result = tournament.removeParticipant(p1);
@@ -219,7 +201,9 @@ public class DefaultTournamentTest {
 	public void shouldNotRemoveParticipant() {
 		String p1 = "p1";
 		String p2 = "p2";
-		String[] participants = { p1, p2 };
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
 		tournament.addParticipants(participants);
 		// when
 		boolean result = tournament.removeParticipant(null);
@@ -233,7 +217,9 @@ public class DefaultTournamentTest {
 	public void shouldReturnParticipantsCount() {
 		String p1 = "p1";
 		String p2 = "p2";
-		String[] participants = { p1, p2 };
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
 		tournament.addParticipants(participants);
 		// when
 		int count = tournament.getParticipantsCount();
@@ -245,7 +231,9 @@ public class DefaultTournamentTest {
 	public void shouldReturnParticipantsList() {
 		String p1 = "p1";
 		String p2 = "p2";
-		String[] participants = { p1, p2 };
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
 		tournament.addParticipants(participants);
 		// when
 		List<String> participantsList = tournament.getParticipants();
@@ -256,19 +244,35 @@ public class DefaultTournamentTest {
 	@Test
 	public void shouldGetDuels() {
 		// given
-		String[] participants = { "p1", "p2", "p3", "p4" };
+		String p1 = "p1";
+		String p2 = "p2";
+		String p3 = "p3";
+		String p4 = "p4";
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
+		participants.add(p3);
+		participants.add(p4);
 		tournament.addParticipants(participants);
 		tournament.start();
 		// when
 		List<Duel<String>> duels = tournament.getDuels();
 		// then
-		assertEquals(3, duels);
+		assertEquals(3, duels.size());
 	}
 	
 	@Test
 	public void shouldGetDuelsOnSpecificLevelUsingEnum() {
 		// given
-		String[] participants = { "p1", "p2", "p3", "p4" };
+		String p1 = "p1";
+		String p2 = "p2";
+		String p3 = "p3";
+		String p4 = "p4";
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
+		participants.add(p3);
+		participants.add(p4);
 		tournament.addParticipants(participants);
 		tournament.start();
 		// when
@@ -280,7 +284,15 @@ public class DefaultTournamentTest {
 	@Test
 	public void shouldGetDuelsOnSpecificLevelUsingInt() {
 		// given
-		String[] participants = { "p1", "p2", "p3", "p4" };
+		String p1 = "p1";
+		String p2 = "p2";
+		String p3 = "p3";
+		String p4 = "p4";
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
+		participants.add(p3);
+		participants.add(p4);
 		tournament.addParticipants(participants);
 		tournament.start();
 		// when
@@ -292,8 +304,15 @@ public class DefaultTournamentTest {
 	@Test
 	public void shouldReturnEmptyListOfDuels() {
 		// given
-		String[] participants = { "p1", "p2", "p3", "p4" };
-		tournament.addParticipants(participants);
+		String p1 = "p1";
+		String p2 = "p2";
+		String p3 = "p3";
+		String p4 = "p4";
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
+		participants.add(p3);
+		participants.add(p4);
 		tournament.start();
 		// when
 		List<Duel<String>> duels = tournament.getDuels(Level.QUARTEL_FINAL);
@@ -308,7 +327,11 @@ public class DefaultTournamentTest {
 		String p2 = "p2";
 		String p3 = "p3";
 		String p4 = "p4";
-		String[] participants = { p1, p2, p3, p4 };
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
+		participants.add(p3);
+		participants.add(p4);
 		tournament.addParticipants(participants);
 		tournament.start();
 		List<Duel<String>> semiFinalDuels = tournament.getDuels(Level.SEMI_FINAL);
@@ -323,9 +346,16 @@ public class DefaultTournamentTest {
 	@Test
 	public void shouldReturnEmptyListWithDuelsWhenOther() {
 		// given
-		String[] participants = { "p1", "p2", "p3", "p4" };
+		String p1 = "p1";
+		String p2 = "p2";
+		String p3 = "p3";
+		String p4 = "p4";
 		String notParticipant = "not";
-		tournament.addParticipants(participants);
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
+		participants.add(p3);
+		participants.add(p4);
 		tournament.start();
 		// when
 		List<Duel<String>> duels = tournament.getDuels(notParticipant);
@@ -338,103 +368,92 @@ public class DefaultTournamentTest {
 		// given
 		tournament.start();
 		// when
-		int tournamentLevel = tournament.getTournamentLevel();
+		Level tournamentLevel = tournament.getTournamentLevel();
 		// then
-		assertEquals(0, tournamentLevel);	
+		assertEquals(Level.ZERO, tournamentLevel);	
 	}
 	
 	@Test
 	public void shouldReturn1TournamentLevelWhenTournament2Participants() {
 		// given
-		String[] participants = { "p1", "p2" };
-		tournament.addParticipants(participants);
+		tournament.addParticipants(prepareParticipants(2));
 		tournament.start();
 		// when
-		int tournamentLevel = tournament.getTournamentLevel();
+		Level tournamentLevel = tournament.getTournamentLevel();
 		// then
-		assertEquals(1, tournamentLevel);	
+		assertEquals(Level.FINAL, tournamentLevel);	
 	}
 	
 	@Test
 	public void shouldReturn2TournamentLevelWhenTournament3Participants() {
 		// given
-		String[] participants = { "p1", "p2" };
-		tournament.addParticipants(participants);
+		tournament.addParticipants(prepareParticipants(3));
 		tournament.start();
 		// when
-		int tournamentLevel = tournament.getTournamentLevel();
+		Level tournamentLevel = tournament.getTournamentLevel();
 		// then
-		assertEquals(2, tournamentLevel);	
+		assertEquals(Level.SEMI_FINAL, tournamentLevel);	
 	}
 	
 	@Test
 	public void shouldReturn1TournamentLevelWhenTournament4Participants() {
 		// given
-		String[] participants = { "p1", "p2" };
-		tournament.addParticipants(participants);
+		tournament.addParticipants(prepareParticipants(4));
 		tournament.start();
 		// when
-		int tournamentLevel = tournament.getTournamentLevel();
+		Level tournamentLevel = tournament.getTournamentLevel();
 		// then
-		assertEquals(2, tournamentLevel);	
+		assertEquals(Level.SEMI_FINAL, tournamentLevel);	
 	}
 	
 	@Test
 	public void shouldReturn3TournamentLevelWhenTournament5Participants() {
 		// given
-		String[] participants = new String[5];
-		for (int i = 0; i < 5; i++) {
-			participants[i] = new String();
-		}
-		tournament.addParticipants(participants);
+		tournament.addParticipants(prepareParticipants(5));
 		tournament.start();
 		// when
-		int tournamentLevel = tournament.getTournamentLevel();
+		Level tournamentLevel = tournament.getTournamentLevel();
 		// then
-		assertEquals(3, tournamentLevel);	
+		assertEquals(Level.QUARTEL_FINAL, tournamentLevel);
 	}
 	
 	@Test
 	public void shouldReturn3TournamentLevelWhenTournament8Participants() {
 		// given
-		String[] participants = new String[8];
-		for (int i = 0; i < 8; i++) {
-			participants[i] = new String();
-		}
-		tournament.addParticipants(participants);
+		tournament.addParticipants(prepareParticipants(8));
 		tournament.start();
 		// when
-		int tournamentLevel = tournament.getTournamentLevel();
+		Level tournamentLevel = tournament.getTournamentLevel();
 		// then
-		assertEquals(3, tournamentLevel);	
+		assertEquals(Level.QUARTEL_FINAL, tournamentLevel);	
 	}
 	
 	@Test
 	public void shouldReturn4TournamentLevelWhenTournament9Participants() {
 		// given
-		String[] participants = new String[9];
-		for (int i = 0; i < 9; i++) {
-			participants[i] = new String();
-		}
-		tournament.addParticipants(participants);
+		tournament.addParticipants(prepareParticipants(9));
 		tournament.start();
 		// when
-		int tournamentLevel = tournament.getTournamentLevel();
+		Level tournamentLevel = tournament.getTournamentLevel();
 		// then
-		assertEquals(3, tournamentLevel);	
+		assertEquals(Level.ROUND_OF_16, tournamentLevel);	
 	}
 	
 	@Test
 	public void shouldReturnFinalDuel() {
 		// given
-		String[] participants = { "p1", "p2" };
+		String p1 = "p1";
+		String p2 = "p2";
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
 		tournament.addParticipants(participants);
 		tournament.start();
 		// when
 		Duel<String> tFinal = tournament.getFinal();
 		// then
-		assertTrue(tFinal.getParticipants().contains(participants[0]));
-		assertTrue(tFinal.getParticipants().contains(participants[1]));
+		assertTrue(tFinal.getParticipants().contains(p1));
+		assertTrue(tFinal.getParticipants().contains(p2));
 	}
 	
 	@Test
@@ -442,8 +461,11 @@ public class DefaultTournamentTest {
 		// given
 		String p1 = "p1";
 		String p2 = "p2";
-		String[] participants = { p1, p2 };
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
 		tournament.addParticipants(participants);
+		tournament.start();
 		tournament.getFinal().setWinner(p1);
 		// when
 		String winner = tournament.getWinner();
@@ -456,12 +478,21 @@ public class DefaultTournamentTest {
 		// given
 		String p1 = "p1";
 		String p2 = "p2";
-		String[] participants = { p1, p2 };
-		tournament.addParticipants(participants);
+		List<String> participants = new ArrayList<>();
+		participants.add(p1);
+		participants.add(p2);
 		// when
 		String winner = tournament.getWinner();
 		// then
 		assertNull(winner);
+	}
+	
+	private List<String> prepareParticipants(int count) {
+		List<String> participants = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			participants.add(new String(Integer.toString(i)));
+		}
+		return participants;
 	}
 
 }
