@@ -6,7 +6,6 @@ package implementation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +14,6 @@ import java.util.stream.Stream;
 import enums.Level;
 import interfaces.Duel;
 import interfaces.Tournament;
-import math.MathUtils;
 import starter.TournamentStarter;
 
 /**
@@ -48,6 +46,9 @@ public class DefaultTournament<T> implements Tournament<T> {
 
 	@Override
 	public boolean isFinished() {
+		if (getFinal() == null) {
+			return false;
+		}
 		return getFinal().getWinner() != null;
 	}
 
@@ -172,6 +173,11 @@ public class DefaultTournament<T> implements Tournament<T> {
 
 	public void setStarted(boolean started) {
 		this.started = started;
+	}
+
+	@Override
+	public void setParticipants(List<T> participants) {
+		this.participants = participants;	
 	}
 
 }

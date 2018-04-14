@@ -30,6 +30,12 @@ public interface Duel<T> {
 	
 	/**
 	 * 
+	 * @param participants to set
+	 */
+	void setParticipants(List<T> participants);
+	
+	/**
+	 * 
 	 * Adds participant to duel. Duel can contains only 2 participants.
 	 * 
 	 * @param t Participant to add
@@ -88,5 +94,17 @@ public interface Duel<T> {
 	 * @return Level of tournament
 	 */
 	Level getLevel();
+	
+	/**
+	 * 
+	 * @return id of duel
+	 */
+	Long getId();
+	
+	/**
+	 * 
+	 * @param id to set
+	 */
+	void setId(Long id);
 	
 }

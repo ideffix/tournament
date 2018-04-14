@@ -6,7 +6,6 @@ package implementation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,6 +31,8 @@ public class DefaultDuel<T> implements Duel<T> {
 	private Duel<T> winnerDuel;
 	
 	private Level level = Level.ZERO;
+	
+	private Long id;
 
 	@Override
 	public void setWinner(T t) {
@@ -124,6 +125,21 @@ public class DefaultDuel<T> implements Duel<T> {
 	
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+
+	@Override
+	public void setParticipants(List<T> participants) {
+		this.participants = participants;
+	}
+
+	@Override
+	public Long getId() {
+		return this.id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

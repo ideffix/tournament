@@ -81,6 +81,12 @@ public interface Tournament<T> {
 	
 	/**
 	 * 
+	 * @param participants to set
+	 */
+	void setParticipants(List<T> participants);
+	
+	/**
+	 * 
 	 * @return All duels in tournament on every level
 	 */
 	List<Duel<T>> getDuels();
