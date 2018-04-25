@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import enums.Level;
 import interfaces.Duel;
 
@@ -18,6 +20,7 @@ import interfaces.Duel;
  * @author ideff
  *
  */
+@JsonIgnoreProperties("winnerDuel")
 public class DefaultDuel<T> implements Duel<T> {
 	
 	private T winner;
