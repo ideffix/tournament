@@ -7,6 +7,7 @@ import org.apache.commons.collections4.ListUtils;
 import enums.Level;
 import implementation.DefaultDuel;
 import implementation.DefaultTournament;
+import interfaces.Duel;
 import math.MathUtils;
 
 /**
@@ -28,6 +29,7 @@ public class TournamentStarter<T> {
 		tournament.setTournamentLevel(getTournamentLevel());
 		tournament.setFinal(createDuel(tournament.getParticipants(), 1));
 		tournament.setStarted(true);
+		setWinnersIfOnlyOneParticipant();
 	}
 
 	private DefaultDuel<T> createDuel(List<T> participants, int level) {
@@ -54,6 +56,14 @@ public class TournamentStarter<T> {
 		duel.setLevel(Level.getLevel(level));
 		tournament.addDuel(duel);
 		return duel;
+	}
+	
+	private void setWinnersIfOnlyOneParticipant() {
+		for (Duel<T> duel : tournament.getDuels(tournament.getTournamentLevel())) {
+			if (duel.getParticipants().size() != 2) {
+				duel.setWinner(duel.getParticipants().get(0));
+			}
+		}
 	}
 	
 	private Level getTournamentLevel() {
