@@ -36,6 +36,8 @@ public class DefaultDuel<T> implements Duel<T> {
 	private Level level = Level.ZERO;
 	
 	private Long id;
+	
+	private String metadata;
 
 	@Override
 	public void setWinner(T t) {
@@ -143,6 +145,16 @@ public class DefaultDuel<T> implements Duel<T> {
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Override
+	public String getMetadata() {
+		return metadata;
+	}
+
+	@Override
+	public void setMetadata(String metadata) {
+		this.metadata = metadata;
 	}
 
 }

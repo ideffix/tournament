@@ -107,4 +107,16 @@ public interface Duel<T> {
 	 */
 	void setId(Long id);
 	
+	/**
+	 * 
+	 * @return metadata of duel
+	 */
+	String getMetadata();
+	
+	/**
+	 * 
+	 * @param metadata to set
+	 */
+	void setMetadata(String metadata);
+	
 }
